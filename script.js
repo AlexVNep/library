@@ -1,6 +1,7 @@
 const title = document.querySelector('#title');
 const author = document.querySelector('#author');
 const pages = document.querySelector('#pages');
+const radioBtns = document.querySelectorAll('.radio')
 const yes =  document.querySelector('#yes');
 const no = document.querySelector('#no');
 
@@ -28,7 +29,21 @@ const bookList = document.querySelector('.books');
 
 const addBookToLibrary = (ev) => {
     ev.preventDefault(); // ev = event being passed to function preventing btn from submitting
-    let newBook = new Book(title.value, author.value, pages.value, yes.value);
+    let newBook = new Book(title.value, author.value, pages.value, radioBtns.id)
+    for(let radio of radioBtns){
+        if(radio.checked){
+            if (yes.checked){
+                console.log(yes.id)
+                radioBtns.value = 'yes';
+            } else {
+                console.log(no.id)
+                // no.textContent = 'no';
+            }           
+            // console.log(radioBtns.value)        
+        }
+    }
+    
+        
 
     myLibrary.push(newBook);
     document.forms[0].reset();
