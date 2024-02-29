@@ -27,7 +27,7 @@ const bookList = document.querySelector('.books');
 
 
 const addBookToLibrary = (ev) => {
-    ev.preventDefault(); // ev is the event being passed to the function here it is preventing the btn from submitting
+    ev.preventDefault(); // ev = event being passed to function preventing btn from submitting
     let newBook = new Book(title.value, author.value, pages.value, yes.value);
 
     myLibrary.push(newBook);
@@ -44,20 +44,16 @@ addBookBtn.addEventListener('click', addBookToLibrary);
 function displayBooks(){
     for (let i = 0; i < myLibrary.length; i++) {
         const bookListContent = document.createElement('div'); //creating div to append "list" to.
+        bookListContent.classList.add('card')
         let book = myLibrary[i]; // book = the array loop output of myLibrary
         const entries = Object.entries(book);
         bookListContent.textContent = entries;
-        console.log(bookListContent.textContent)
-        console.log(book)
         bookList.appendChild(bookListContent);
      }   
 }    
 displayBooks();
+
 addBookBtn.addEventListener('click', () => {
-    bookListContent.remove();
-    displayBooks});
-
-
-
-// theHobbit.info(); 
-// console.log(theHobbit.info());
+    bookList.textContent = '';
+    displayBooks();
+})
