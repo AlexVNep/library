@@ -9,11 +9,9 @@ function Book(title, author, pages, read){
     this.author = author;
     this.pages = pages;
     this.read = read;
-    this.info = function() {
-        return `${this.title} by ${this.author}, ${this.pages} pages, ${read}`
-    }
 }
 
+//examples of inputs
 let theHobbit=new Book('The Hobbit', 'J.R.R. Tolkein',295, 'no');
 let hitch= new Book("The Hitchiker's Guide to the Galaxy", 'Douglas Adams', 216, 'yes');
 let rescue= new Book("The Rescue","Nicholas Sparks", 339, 'yes');
@@ -25,42 +23,42 @@ myLibrary[2]=rescue;
 
 const  userInput = document.querySelectorAll('input');
 const addBookBtn = document.querySelector('.add-book');
-
+const bookList = document.querySelector('.books');
 
 
 const addBookToLibrary = (ev) => {
     ev.preventDefault(); // ev is the event being passed to the function here it is preventing the btn from submitting
-    let newBook = {
-         title: title.value,
-         author: author.value,
-         pages: pages.value,
-         yes: yes.value,
-         no: no.value,
-    }
+    let newBook = new Book(title.value, author.value, pages.value, yes.value);
+
     myLibrary.push(newBook);
     document.forms[0].reset();
 
     console.warn('added', {myLibrary});
-    const bookList = document.querySelector('.books');
-    const bookListContent = document.createElement('div');
-    bookListContent.textContent = '\n' + JSON.stringify(myLibrary, '\t', 2)
-    bookList.appendChild(bookListContent); 
+    // const bookListContent = document.createElement('div');
+    // bookListContent.textContent = '\n' + JSON.stringify(myLibrary, '\t', 2)
+    // bookList.appendChild(bookListContent); 
 }
 addBookBtn.addEventListener('click', addBookToLibrary);
 
 
+function displayBooks(){
+    for (let i = 0; i < myLibrary.length; i++) {
+        const bookListContent = document.createElement('div'); //creating div to append "list" to.
+        let book = myLibrary[i]; // book = the array loop output of myLibrary
+        // bookListContent.textContent = book // making the content of bookListContent = to the output of the loop
+        const entries = Object.entries(book);
+        bookListContent.textContent = entries
+        // entries.forEach(([key, value]) => {
+           
+        //     return (`${key} : ${value}`)
+        // });
+        bookList.appendChild(bookListContent); 
+    }   
+}    
+displayBooks();
+addBookBtn.addEventListener('click', displayBooks);
 
-// function displayBooks(){
-//     for (let i = 0; i < myLibrary.length; i++) {
-//         const bookListContent = document.createElement('div');
-//         let book = myLibrary[i];
-//         bookListContent.textContent = book
-//         bookList.appendChild(bookListContent);        
-//     }   
-// }    
-// displayBooks();
 
 
-
-theHobbit.info(); 
-console.log(theHobbit.info());
+// theHobbit.info(); 
+// console.log(theHobbit.info());
