@@ -45,18 +45,17 @@ function displayBooks(){
     for (let i = 0; i < myLibrary.length; i++) {
         const bookListContent = document.createElement('div'); //creating div to append "list" to.
         let book = myLibrary[i]; // book = the array loop output of myLibrary
-        // bookListContent.textContent = book // making the content of bookListContent = to the output of the loop
         const entries = Object.entries(book);
-        bookListContent.textContent = entries
-        // entries.forEach(([key, value]) => {
-           
-        //     return (`${key} : ${value}`)
-        // });
-        bookList.appendChild(bookListContent); 
-    }   
+        bookListContent.textContent = entries;
+        console.log(bookListContent.textContent)
+        console.log(book)
+        bookList.appendChild(bookListContent);
+     }   
 }    
 displayBooks();
-addBookBtn.addEventListener('click', displayBooks);
+addBookBtn.addEventListener('click', () => {
+    bookListContent.remove();
+    displayBooks});
 
 
 
