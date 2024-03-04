@@ -27,7 +27,15 @@ myLibrary[0]=theHobbit;
 myLibrary[1]=hitch;
 myLibrary[2]=rescue;
 
+function showUserInput(){
+    
+
+}
+
+const dialog = document.querySelector('dialog');
 const  userInput = document.querySelectorAll('input');
+const newBookBtn = document.querySelector('.new-book')
+const closeBtn = document.querySelector('.close-button');
 const addBookBtn = document.querySelector('.add-book');
 const bookList = document.querySelector('.books');
 
@@ -39,13 +47,8 @@ const addBookToLibrary = (ev) => {
     myLibrary.push(newBook);
     document.forms[0].reset();
    
-    console.warn('added', {myLibrary});
-    // const bookListContent = document.createElement('div');
-    // bookListContent.textContent = '\n' + JSON.stringify(myLibrary, '\t', 2)
-    // bookList.appendChild(bookListContent); 
-}
+    console.warn('added', {myLibrary});}
 addBookBtn.addEventListener('click', addBookToLibrary);
-
 
 function displayBooks(){
     for (let i = 0; i < myLibrary.length; i++) {
