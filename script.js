@@ -1,14 +1,17 @@
-const title = document.querySelector('#title').value;
-const author = document.querySelector('#author').value;
-const pages = document.querySelector('#pages').value;
+const dialog = document.querySelector('dialog');
+const newBookBtn = document.querySelector('.new-book')
+const closeBtn = document.querySelector('.close-button');
+const addBookBtn = document.querySelector('.add-book');
+const bookList = document.querySelector('.books');
 const read = document.querySelectorAll('input[name="is-read"]');
+
 let isRead;
-read.forEach(radio => {
-    radio.addEventListener('click', function(){
-        isRead = radio.value;
-        console.log(isRead);
+    read.forEach(radio => {
+        radio.addEventListener('click', function(){
+            isRead = radio.value;
+            console.log(isRead);
+        })
     })
-})
 
 function Book(title, author, pages, isRead){
     this.title = title;
@@ -28,26 +31,31 @@ myLibrary[1]=hitch;
 myLibrary[2]=rescue;
 
 function showUserInput(){
-    
-
+    dialog.showModal();
 }
 
-const dialog = document.querySelector('dialog');
-const  userInput = document.querySelectorAll('input');
-const newBookBtn = document.querySelector('.new-book')
-const closeBtn = document.querySelector('.close-button');
-const addBookBtn = document.querySelector('.add-book');
-const bookList = document.querySelector('.books');
+newBookBtn.addEventListener('click', showUserInput);
 
+function closeInput (){
+    dialog.close()
+}
+
+closeBtn.addEventListener('click', closeInput);
 
 const addBookToLibrary = (ev) => {
     ev.preventDefault(); // ev = event being passed to function preventing btn from submitting
+    const title = document.querySelector('#title').value;
+    const author = document.querySelector('#author').value;
+    const pages = document.querySelector('#pages').value;
+    
+    
     let newBook = new Book(title, author, pages, isRead)
     
     myLibrary.push(newBook);
     document.forms[0].reset();
-   
-    console.warn('added', {myLibrary});}
+   dialog.close();
+    console.warn('added', {myLibrary});
+}
 addBookBtn.addEventListener('click', addBookToLibrary);
 
 function displayBooks(){
