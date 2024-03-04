@@ -15,24 +15,29 @@
     <div class="books">
     </div>
     <div class="newbook">
-        <button>NEW BOOK</button>
+        <button class="new-book">NEW BOOK</button>
     </div>
-    <legend>Add your book information here.</legend>
-    <form action="#">
-    <div class="book-info">
-        <label for="author">Author:</label>
-        <input type="text" name="author" id="author">
-        <label for="title">Title:</label>
-        <input type="text" name="title" id="title">
-        <label for="pages">Number of pages:</label>
-        <input type="text" name="pages" id="pages">
-        <div class="read">Have you read it?</div>
-        <input type="radio"  name="is-read" id="yes" value="Yes" checked>
-        <label for="yes">Yes</label>
-        <input type="radio" name="is-read" id="no" value="No">
-        <label for="no">No</label>
-        <button class="add-book">Add Book</button>            
+    <div class="modal">
+        <dialog>
+            <legend>Add your book information here.</legend>
+            <form action="#">
+                <div class="book-info">
+                    <label for="author">Author:</label>
+                    <input type="text" name="author" id="author">
+                    <label for="title">Title:</label>
+                    <input type="text" name="title" id="title">
+                    <label for="pages">Number of pages:</label>
+                    <input type="text" name="pages" id="pages">
+                    <div class="read">Have you read it?</div>
+                    <input type="radio"  name="is-read" id="yes" value="Yes" checked>
+                    <label for="yes">Yes</label>
+                    <input type="radio" name="is-read" id="no" value="No">
+                    <label for="no">No</label>
+                    <button class="add-book">Add Book</button>
+                    <button class="close-button">Close</button>
+                </div>
+            </form>
+        </dialog>
     </div>
-    </form>
 </body>
 </html>
