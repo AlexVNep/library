@@ -1,21 +1,26 @@
-const title = document.querySelector('#title');
-const author = document.querySelector('#author');
-const pages = document.querySelector('#pages');
-const radioBtns = document.querySelectorAll('.radio')
-const yes =  document.querySelector('#yes');
-const no = document.querySelector('#no');
+const title = document.querySelector('#title').value;
+const author = document.querySelector('#author').value;
+const pages = document.querySelector('#pages').value;
+const read = document.querySelectorAll('input[name="is-read"]');
+let isRead;
+read.forEach(radio => {
+    radio.addEventListener('click', function(){
+        isRead = radio.value;
+        console.log(isRead);
+    })
+})
 
-function Book(title, author, pages, read){
+function Book(title, author, pages, isRead){
     this.title = title;
     this.author = author;
     this.pages = pages;
-    this.read = read;
+    this.isRead = isRead;
 }
 
 //examples of inputs
-let theHobbit=new Book('The Hobbit', 'J.R.R. Tolkein',295, 'no');
-let hitch= new Book("The Hitchiker's Guide to the Galaxy", 'Douglas Adams', 216, 'yes');
-let rescue= new Book("The Rescue","Nicholas Sparks", 339, 'yes');
+let theHobbit=new Book('The Hobbit', 'J.R.R. Tolkein',295, 'No');
+let hitch= new Book("The Hitchiker's Guide to the Galaxy", 'Douglas Adams', 216, 'Yes');
+let rescue= new Book("The Rescue","Nicholas Sparks", 339, 'Yes');
 
 const myLibrary =  [];
 myLibrary[0]=theHobbit;
@@ -29,25 +34,11 @@ const bookList = document.querySelector('.books');
 
 const addBookToLibrary = (ev) => {
     ev.preventDefault(); // ev = event being passed to function preventing btn from submitting
-    let newBook = new Book(title.value, author.value, pages.value, radioBtns.id)
-    for(let radio of radioBtns){
-        if(radio.checked){
-            if (yes.checked){
-                console.log(yes.id)
-                radioBtns.value = 'yes';
-            } else {
-                console.log(no.id)
-                // no.textContent = 'no';
-            }           
-            // console.log(radioBtns.value)        
-        }
-    }
+    let newBook = new Book(title, author, pages, isRead)
     
-        
-
     myLibrary.push(newBook);
     document.forms[0].reset();
-
+   
     console.warn('added', {myLibrary});
     // const bookListContent = document.createElement('div');
     // bookListContent.textContent = '\n' + JSON.stringify(myLibrary, '\t', 2)
