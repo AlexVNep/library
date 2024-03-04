@@ -66,9 +66,25 @@ function displayBooks(){
         const entries = Object.entries(book);
         bookListContent.textContent = entries;
         bookList.appendChild(bookListContent);
+
+        const changeBtn = document.createElement('button');
+        changeBtn.classList.add('change');
+        changeBtn.textContent = 'Change';
+        bookListContent.appendChild(changeBtn)
+        
+        const deleteBtn = document.createElement('button');
+        deleteBtn.classList.add('delete');
+        deleteBtn.textContent = 'Delete';
+        bookListContent.appendChild(deleteBtn);
      }   
 }    
 displayBooks();
+
+Book.prototype.changeStatus = function () {
+    this.isRead = this.isRead === 'Yes' ? 'No' : 'Yes';    
+}
+
+
 
 addBookBtn.addEventListener('click', () => {
     bookList.textContent = '';
