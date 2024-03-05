@@ -3,15 +3,7 @@ const newBookBtn = document.querySelector('.new-book')
 const closeBtn = document.querySelector('.close-button');
 const addBookBtn = document.querySelector('.add-book');
 const bookList = document.querySelector('.books');
-const read = document.querySelectorAll('input[name="is-read"]');
-
-let isRead;
-    read.forEach(radio => {
-        radio.addEventListener('click', function(){
-            isRead = radio.value;
-            console.log(isRead);
-        })
-    })
+const isRead = document.querySelector('.is-read')
 
 function Book(title, author, pages, isRead){
     this.title = title;
@@ -46,9 +38,8 @@ const addBookToLibrary = (ev) => {
     ev.preventDefault(); // ev = event being passed to function preventing btn from submitting
     const title = document.querySelector('#title').value;
     const author = document.querySelector('#author').value;
-    const pages = document.querySelector('#pages').value;
-    
-    
+    const pages = document.querySelector('#pages').value;  
+
     let newBook = new Book(title, author, pages, isRead)
     
     myLibrary.push(newBook);
@@ -59,32 +50,46 @@ const addBookToLibrary = (ev) => {
 addBookBtn.addEventListener('click', addBookToLibrary);
 
 function displayBooks(){
-    for (let i = 0; i < myLibrary.length; i++) {
-        const bookListContent = document.createElement('div'); //creating div to append "list" to.
-        bookListContent.classList.add('card')
-        let book = myLibrary[i]; // book = the array loop output of myLibrary
-        const entries = Object.entries(book);
-        bookListContent.textContent = entries;
-        bookList.appendChild(bookListContent);
+    console.table(myLibrary)
+    // for (let i = 0; i < myLibrary.length; i++) {
+        myLibrary.forEach(element => {
+            const bookListContent = document.createElement('div'); //creating div to append "list" to.
+            bookListContent.classList.add('card')
+            const elementIndex = myLibrary.indexOf(element);
+            bookListContent.innerHTML = ` ${element.title} ${element.author} ${element.pages} ${element.isRead} <button class= 'change'>Change</button> <button class= 'delete'>Delete</button>` ;
+            bookList.appendChild(bookListContent);
+        })
 
-        const changeBtn = document.createElement('button');
-        changeBtn.classList.add('change');
-        changeBtn.textContent = 'Change';
-        bookListContent.appendChild(changeBtn)
+        let bookRead = 'Yes';
+
+        isRead.addEventListener('click', () => {
+            console.log(isRead.value)
+            if(isRead.value === 'Yes'){
+                bookRead = 'No'
+                isRead.value = bookRead;
+            } else if (isRead.value === 'No'){
+                bookRead = 'Yes'
+                isRead.value = bookRead;
+            }
+        })
+
+        const changeBtn = document.querySelectorAll('button');
+    
+
         
-        const deleteBtn = document.createElement('button');
-        deleteBtn.classList.add('delete');
-        deleteBtn.textContent = 'Delete';
-        bookListContent.appendChild(deleteBtn);
-     }   
+
+    //     // const deleteBtn = document.createElement('button');
+    //     // deleteBtn.classList.add('delete');
+    //     // deleteBtn.textContent = 'Delete';
+    //     // bookListContent.appendChild(deleteBtn);
+    //  }   
 }    
 displayBooks();
 
-Book.prototype.changeStatus = function () {
-    this.isRead = this.isRead === 'Yes' ? 'No' : 'Yes';    
-}
-
-
+// function changeBookStatus(arrayIndex) {
+//     myLibrary[arrayIndex].changeReadState();
+//     displayBooks();           
+// }
 
 addBookBtn.addEventListener('click', () => {
     bookList.textContent = '';
